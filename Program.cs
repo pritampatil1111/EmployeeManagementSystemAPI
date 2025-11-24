@@ -1,4 +1,7 @@
 using EmployeeManagementSystemAPI.Data;
+using EmployeeManagementSystemAPI.Interfaces;
+using EmployeeManagementSystemAPI.Repositories;
+using EmployeeManagementSystemAPI.Services;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 
@@ -14,6 +17,10 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<UserDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("UserDatabase")));
+
+
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 
 
 var app = builder.Build();
